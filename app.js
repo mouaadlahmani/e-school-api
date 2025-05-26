@@ -19,7 +19,7 @@ const PORT = process.env.PORT || "3000";
 connectDB();
 
 const corsOptions = {
-    origin: 'https://e-school-wheat.vercel.app',
+    origin: 'https://e-school-six-delta.vercel.app',
     credentials: true,
     optionSuccessStatus: 200
 }
