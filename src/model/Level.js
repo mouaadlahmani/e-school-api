@@ -9,6 +9,11 @@ const LevelSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    icon: {
+        type: String,
+        default: null,
+        trim: true
+    },
 }, {
     timestamps: true
 })
