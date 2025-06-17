@@ -11,6 +11,8 @@ const subjectRoutes = require("./src/routes/subjectRoutes");
 const titleRoutes = require("./src/routes/titleRoutes");
 const folderRoutes = require("./src/routes/folderRoutes");
 const userRoutes = require("./src/routes/userRoutes");
+const articleRoutes = require("./src/routes/articleRoutes");
+const appliesRoutes = require("./src/routes/appliesRoutes");
 
 dotenv.config();
 const app = express();
@@ -19,14 +21,14 @@ const PORT = process.env.PORT || "3000";
 connectDB();
 
 const corsOptions = {
-    origin: 'https://e-school-six-delta.vercel.app',
-    credentials: true,
-    optionSuccessStatus: 200
+  origin: 'http://localhost:3000',
+  credentials: true,
+  optionSuccessStatus: 200
 }
 app.use(cors(corsOptions));
 
 app.use(express.json());
-app.use('/uploads', express.static('uploads'));
+app.use("/uploads", express.static("uploads"));
 
 app.use("/api/auth", userRoutes);
 app.use("/api/country", countryRoutes);
@@ -35,11 +37,13 @@ app.use("/api/academic", academicLevelRoutes);
 app.use("/api/subject", subjectRoutes);
 app.use("/api/title", titleRoutes);
 app.use("/api/folder", folderRoutes);
+app.use("/api/articles", articleRoutes);
+app.use('/api/applies', appliesRoutes);
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-const createAdmin = async () =>{
+const createAdmin = async () => {
   try {
     const fullname = "E-School";
     const email = "admin@gmail.com";
@@ -47,13 +51,13 @@ const createAdmin = async () =>{
     const role = "admin"
 
     const existingAdmin = await userModel.findOne({ email });
-    if(!existingAdmin){
+    if (!existingAdmin) {
 
       const hashedPassword = await bcrypt.hash(password, 10);
-      const newAdmin = new userModel({fullname, email, password: hashedPassword, role});
+      const newAdmin = new userModel({ fullname, email, password: hashedPassword, role });
       await newAdmin.save();
       console.log("Admin created successfully.");
-    }else{
+    } else {
       console.log("Admin already exists.");
     }
   } catch (error) {
@@ -61,7 +65,7 @@ const createAdmin = async () =>{
   }
 }
 
-app.listen(PORT, async ()=> {
+app.listen(PORT, async () => {
   await createAdmin();
   console.log(`E-shcool running on http://localhost:${PORT}`);
 })
