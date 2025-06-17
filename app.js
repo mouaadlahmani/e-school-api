@@ -21,7 +21,7 @@ const PORT = process.env.PORT || "3000";
 connectDB();
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'http://31.97.155.19:3000',
   credentials: true,
   optionSuccessStatus: 200
 }
