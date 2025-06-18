@@ -21,7 +21,7 @@ const PORT = process.env.PORT || "3000";
 connectDB();
 
 const corsOptions = {
-  origin: 'http://gomyclass.com',
+  origin: 'https://gomyclass.com',
   credentials: true,
   optionSuccessStatus: 200
 }
